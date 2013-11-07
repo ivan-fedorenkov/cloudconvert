@@ -1,2 +1,2 @@
-require "cloudconvert/version"
-require "cloudconvert/session"
+require 'cloudconvert/version'
+require 'cloudconvert/session'
