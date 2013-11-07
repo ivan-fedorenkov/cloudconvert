@@ -3,8 +3,9 @@ require "net/http/post/multipart"
 require "json"
 require "yaml"
 require "openssl"
-  
-  class Cloudconvert::Session 
+
+module Cloudconvert
+  class Session 
     attr_accessor :cloudconvert_uri
   
     def initialize
@@ -72,3 +73,4 @@ require "openssl"
       return http
     end
   end
+end
