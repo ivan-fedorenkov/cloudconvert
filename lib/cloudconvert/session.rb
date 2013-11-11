@@ -43,7 +43,7 @@ module Cloudconvert
       JSON.parse(resp.body)
     end
   
-    def wait_until_complete_and_download
+    def wait_until_complete_and_download_to(result_filepath = nil)
       current_status = {}
       begin
         current_status = status()
@@ -52,17 +52,17 @@ module Cloudconvert
       end until ((current_phase == "finished") and (current_percents == 100.0))
   
       download_uri = URI("https:" + current_status["output"]["url"])
-      download_filename = current_status["output"]["filename"]
+      result_filepath ||= current_status["output"]["filename"]
   
       cloudconvert_http(download_uri).start do |http|
         req = Net::HTTP::Get.new download_uri
         resp = http.request(req)
-        open(download_filename, "wb") do |file|
+        open(result_filepath, "wb") do |file|
           file.write(resp.body)
         end
       end
   
-      puts "Successfully downloaded and saved file: #{download_filename}!"
+      puts "Successfully downloaded and saved file: #{result_filepath}!"
     end
   
   private
