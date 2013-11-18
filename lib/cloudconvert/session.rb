@@ -43,10 +43,11 @@ module Cloudconvert
       JSON.parse(resp.body)
     end
   
-    def wait_until_complete_and_download_to(result_filepath = nil)
+    def wait_until_complete_and_download_to(result_filepath = nil, debug_mode = false)
       current_status = {}
       begin
         current_status = status()
+        puts current_status.to_s if debug_mode
         current_percents = current_status["percent"].to_f
         current_phase = current_status["step"].to_s
       end until ((current_phase == "finished") and (current_percents == 100.0))
