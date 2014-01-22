@@ -1,6 +1,7 @@
 require 'cloudconvert/version'
 require 'cloudconvert/configuration'
 require 'cloudconvert/session'
+require 'cloudconvert/utils'
 
 module Cloudconvert
   CLOUDCONVERT_URL = "https://api.cloudconvert.org"
