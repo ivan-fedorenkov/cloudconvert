@@ -8,7 +8,8 @@ module Cloudconvert
           entries = zipfile.entries.delete_if { |e| not e.name.end_with?(expected_format) }
           entries.each do |part|
             extracted_part_file = Tempfile.new("extracted_part_file")
-            part.extract(extracted_part_file)
+            # Override if file already exist 
+            part.extract(extracted_part_file) { true }
             yield extracted_part_file
           end
         end
